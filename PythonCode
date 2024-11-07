@@ -1,0 +1,137 @@
+from tkinter import *
+import math
+
+tk = Tk()
+tk.title("Vector Equations")
+x=[0,0,0]
+y=[0,0,0]
+c=[0,0,0]
+def run():
+    x[0] = float(r1.get())
+    x[1] = float(r2.get())
+    x[2] = float(r3.get())
+
+    y[0] = float(a1.get())
+    y[1] = float(a2.get())
+    y[2] = float(a3.get())
+
+    magv1 = (x[0]**2+x[1]**2+x[2]**2)**0.5
+    magv2 = (y[0]**2+y[1]**2+y[2]**2)**0.5
+
+    c[0] = x[1] * y[2] - x[2] * y[1]
+
+    c[1] = -(x[0]*y[2]-x[2]*y[0])
+
+    c[2] = x[0]*y[1]-x[1]*y[0]
+
+    magCross = (((c[0])**2+(c[1])**2+(c[2])**2))
+
+    magCross = (magCross)**0.5
+
+    dotProd = x[0]*y[0] + x[1]*y[1] + x[2]*y[2]
+
+    magFirstVec = (x[0]**2+x[1]**2+x[2]**2)**0.5
+
+    magSecVec = (y[0]**2+y[1]**2+y[2]**2)**0.5
+
+    try:
+
+        anlgerad = math.acos(dotProd/(magSecVec*magFirstVec))
+
+        angledeg = anlgerad * 180/math.pi
+
+    except:
+        pass
+
+    magv1text.configure(text = '|Vector 1|: '+str(round(magv1,2)))
+    magv2text.configure(text = '|Vector 2|: '+str(round(magv2,2)))
+
+
+    dotProdText.configure(text= 'Dot Product: ' +str(round(dotProd,2)))
+
+    crossProdText.configure(text = 'Cross Product: ' + '(' + str(c[0]) + ', ' +  str(c[1]) + ', ' + str(c[2])  + ')')
+    magCrossProdText.configure(text='|Cross Product|: ' + str(round(magCross,2)))
+    try:
+        angleVec.configure(text = "Angle Between 2 Vectors: "+ str(round(angledeg,2)) +' Degrees')
+    except:
+        angleVec.configure(text = "Angle Between 2 Vectors: No Angle")
+
+def reset():
+    r1str.set('0')
+    r2str.set('0')
+    r3str.set('0')
+    a1str.set('0')
+    a2str.set('0')
+    a3str.set('0')
+
+    magv1text.configure(text='|Vector 1|: ')
+    magv2text.configure(text='|Vector 2|: ')
+
+    dotProdText.configure(text='Dot Product: ')
+    crossProdText.configure(text='Cross Product: ')
+    magCrossProdText.configure(text='|Cross Product|: ')
+
+    angleVec.configure(text="Angle Between 2 Vectors: ")
+
+vec1 = Label(tk,text = 'Vector 1',font=('Ariel',15))
+vec1.place(x=30,y=10)
+
+r1str = StringVar()
+r1str.set('0')
+r1 = Entry(tk,textvariable=r1str)
+r1.place(x=30,y=50,width = 30, height = 30)
+
+r2str = StringVar()
+r2str.set('0')
+r2 = Entry(tk,textvariable=r2str)
+r2.place(x=80,y=50,width = 30, height = 30)
+
+r3str = StringVar()
+r3str.set('0')
+r3 = Entry(tk,textvariable=r3str)
+r3.place(x=130,y=50,width = 30, height = 30)
+
+vec2 = Label(tk,text = 'Vector 2',font=('Ariel',15))
+vec2.place(x=30,y=90)
+
+a1str = StringVar()
+a1str.set('0')
+a1 = Entry(tk,textvariable=a1str)
+a1.place(x=30,y=130,width = 30, height = 30)
+
+a2str = StringVar()
+a2str.set('0')
+a2 = Entry(tk,textvariable=a2str)
+a2.place(x=80,y=130,width = 30, height = 30)
+
+a3str = StringVar()
+a3str.set('0')
+a3 = Entry(tk,textvariable=a3str)
+a3.place(x=130,y=130,width = 30, height = 30)
+
+magv1text = Label(tk,text = '|Vector 1|: ', font = ("Ariel",10))
+magv1text.place(x=30,y=170)
+
+magv2text = Label(tk,text = '|Vector 2|: ', font = ("Ariel",10))
+magv2text.place(x=30,y=190)
+
+dotProdText = Label(tk,text='Dot Product: ',font = ('Ariel',10))
+dotProdText.place(x=30,y=210)
+
+crossProdText = Label(tk,text='Cross Product: ',font = ('Ariel',10))
+crossProdText.place(x=30,y=230)
+
+magCrossProdText = Label(tk,text='|Cross Product|: ',font = ('Ariel',10))
+magCrossProdText.place(x=30,y=250)
+
+angleVec = Label(tk,text = 'Angle Between 2 Vectors: ', font = ('Ariel',10))
+angleVec.place(x=30,y=270)
+
+resetBut = Button(tk,text = 'Reset',font = ('Ariel',15),bg = 'gray',command=reset)
+resetBut.place(x=220,y=80)
+
+butt = Button(tk,text = 'Go',bg = 'green',font = ('Ariel',15),command=run)
+butt.place(x=240,y=20)
+
+tk.geometry('300x300')
+tk.mainloop()
